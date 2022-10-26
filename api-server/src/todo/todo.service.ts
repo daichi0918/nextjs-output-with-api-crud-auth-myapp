@@ -8,12 +8,12 @@ import { UpdateTodoDto } from './dto/update-todo.dto';
 export class TodoService {
   constructor(private prisma: PrismaService) {}
 
-  async create(createTodoDto: CreateTodoDto) {
+  async create(createTodoDto: CreateTodoDto, userId: number) {
     return await this.prisma.todo.create({
       data: {
         title: createTodoDto.title,
         content: createTodoDto.content,
-        userId: 1,
+        userId,
       },
     });
   }
@@ -26,10 +26,11 @@ export class TodoService {
     });
   }
 
-  async findOne(id: number) {
+  async findOne(id: number, userId: number) {
     return await this.prisma.todo.findFirst({
       where: {
         id,
+        userId,
       },
     });
   }

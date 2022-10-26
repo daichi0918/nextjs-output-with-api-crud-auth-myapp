@@ -8,6 +8,7 @@ import {
   Param,
   Delete,
   UseGuards,
+  ValidationPipe,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { TodoService } from './todo.service';
@@ -19,9 +20,13 @@ import { JwtPayload } from '../lib/jwt/interfaces/jwt-payload.interface';
 export class TodoController {
   constructor(private readonly todoService: TodoService) {}
 
+  @UseGuards(AuthGuard('jwt'))
   @Post()
-  create(@Body() createTodoDto: CreateTodoDto) {
-    return this.todoService.create(createTodoDto);
+  create(
+    @Body(ValidationPipe) createTodoDto: CreateTodoDto,
+    @Request() req: { user: JwtPayload },
+  ) {
+    return this.todoService.create(createTodoDto, req.user.userId);
   }
 
   @UseGuards(AuthGuard('jwt'))
@@ -30,9 +35,10 @@ export class TodoController {
     return this.todoService.findAll(req.user.userId);
   }
 
+  @UseGuards(AuthGuard('jwt'))
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.todoService.findOne(+id);
+  findOne(@Param('id') id: string, @Request() req: { user: JwtPayload }) {
+    return this.todoService.findOne(+id, req.user.userId);
   }
 
   @Patch(':id')
