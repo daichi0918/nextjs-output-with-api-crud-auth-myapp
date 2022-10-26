@@ -1,4 +1,5 @@
 import {
+  Request,
   Controller,
   Get,
   Post,
@@ -6,10 +7,13 @@ import {
   Patch,
   Param,
   Delete,
+  UseGuards,
 } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
 import { TodoService } from './todo.service';
 import { CreateTodoDto } from './dto/create-todo.dto';
 import { UpdateTodoDto } from './dto/update-todo.dto';
+import { JwtPayload } from '../lib/jwt/interfaces/jwt-payload.interface';
 
 @Controller('todo')
 export class TodoController {
@@ -20,9 +24,10 @@ export class TodoController {
     return this.todoService.create(createTodoDto);
   }
 
+  @UseGuards(AuthGuard('jwt'))
   @Get()
-  findAll() {
-    return this.todoService.findAll();
+  findAll(@Request() req: { user: JwtPayload }) {
+    return this.todoService.findAll(req.user.userId);
   }
 
   @Get(':id')

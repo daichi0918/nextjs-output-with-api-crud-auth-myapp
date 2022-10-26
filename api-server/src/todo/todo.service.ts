@@ -18,8 +18,12 @@ export class TodoService {
     });
   }
 
-  async findAll(): Promise<Todo[]> {
-    return await this.prisma.todo.findMany();
+  async findAll(userId: number): Promise<Todo[]> {
+    return await this.prisma.todo.findMany({
+      where: {
+        userId,
+      },
+    });
   }
 
   async findOne(id: number) {
