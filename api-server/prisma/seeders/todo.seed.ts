@@ -1,26 +1,27 @@
-import { PrismaClient, Todo } from '@prisma/client';
+import { Todo } from '@prisma/client';
 
-const prisma = new PrismaClient();
-
-const todoData: Array<Todo> = [
+const todoData: Array<Omit<Todo, 'createdAt' | 'updatedAt'>> = [
   {
     id: 1,
     title: 'Todo1',
     content: 'Todo1 content',
+    userId: 1,
   },
   {
     id: 2,
     title: 'Todo2',
     content: 'Todo2 content',
+    userId: 1,
   },
   {
     id: 3,
     title: 'Todo3',
     content: 'Todo3 content',
+    userId: 1,
   },
 ];
 
-const dbSeed = async () => {
+export const dbTodoSeed = async (prisma: any) => {
   const todos = [];
   todoData.forEach((todo) => {
     const createTodos = prisma.todo.create({
@@ -30,20 +31,3 @@ const dbSeed = async () => {
   });
   return await prisma.$transaction(todos);
 };
-
-const main = async () => {
-  console.log('Start seeding ...');
-
-  await dbSeed();
-
-  console.log('Seeding finished.');
-};
-
-main()
-  .catch((e) => {
-    console.error(e);
-    process.exit(1);
-  })
-  .finally(async () => {
-    await prisma.$disconnect();
-  });
