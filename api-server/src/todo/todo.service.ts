@@ -13,6 +13,7 @@ export class TodoService {
       data: {
         title: createTodoDto.title,
         content: createTodoDto.content,
+        userId: 1,
       },
     });
   }
