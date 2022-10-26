@@ -10,6 +10,7 @@ services:
       TZ: Asia/Tokyo # タイムゾーンを日本時刻に設定
     security_opt:
       - seccomp:unconfined
+    command: sh -c 'npm install && npm run dev'
   backend:
     container_name: nestjs_output_with_crud_auth_backend
     build: ./api-server
@@ -25,11 +26,12 @@ services:
       - 8080:3000
     security_opt:
       - seccomp:unconfined
+    command: sh -c 'npm install && npm run start:dev'
 
   db:
     container_name: nestjs_output_with_crud_auth_db
     environment:
-      - MYSQL_DATABASE=NEXTJS_OUTPUT_WITH_CRUD_DB
+      - MYSQL_DATABASE=NEXTJS_OUTPUT_WITH_CRUD_AUTH_DB
       - MYSQL_USER=user
       - MYSQL_PASSWORD=pass
       - MYSQL_ROOT_PASSWORD=pass
