@@ -1,15 +1,15 @@
 /**
- * TodoListPage
+ * SignInPage
  *
  * @package pages
  */
-import type { NextPage } from 'next'
-import {TodoListTemplate} from "@/components/templates/TodoListTemplate";
+import type { NextPage } from 'next';
+import { SignInTemplate } from '@/components/templates/SignInTemplate';
 
 /**
- * TodoListPage
+ * SignInPage
  * @constructor
  */
-const TodoListPage: NextPage = () => <TodoListTemplate />
+const SignInPage: NextPage = () => <SignInTemplate />;
 
-export default TodoListPage
+export default SignInPage;

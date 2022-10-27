@@ -6,7 +6,7 @@
 import { FC } from 'react';
 import styles from './styles.module.css';
 
-type Props = JSX.IntrinsicElements['input']
+type Props = JSX.IntrinsicElements['input'];
 
 /**
  * InputForm
@@ -15,23 +15,15 @@ type Props = JSX.IntrinsicElements['input']
  * @param placeholder
  * @param onChange
  * @param onKeyDown
- * @constructor
  */
-export const InputForm: FC<Props> =
-  ({
-     disabled = false,
-     value,
-     placeholder,
-     onChange,
-     onKeyDown
-   }) => (
-    <input
-      disabled={disabled}
-      className={styles.input}
-      type='text'
-      placeholder={placeholder}
-      value={value}
-      onChange={onChange}
-      onKeyDown={onKeyDown}
-    />
-  );
+export const InputForm: FC<Props> = ({ disabled = false, value, type = 'text', placeholder, onChange, onKeyDown }) => (
+  <input
+    disabled={disabled}
+    className={styles.input}
+    type={type}
+    placeholder={placeholder}
+    value={value}
+    onChange={onChange}
+    onKeyDown={onKeyDown}
+  />
+);
