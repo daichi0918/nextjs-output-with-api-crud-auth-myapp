@@ -1,12 +1,6 @@
 import { AxiosResponse } from 'axios';
-import { globalAxios, isAxiosError, IErrorResponse } from '@/apis/config';
-import { UserType, AuthResponseType } from '@/interfaces/User';
-
-interface ResponseType {
-  code: number;
-  data?: AuthResponseType;
-  message?: string;
-}
+import globalAxios, { isAxiosError, ResponseType, IErrorResponse } from '@/apis/config';
+import { AuthResponseType } from '@/interfaces/User';
 
 /**
  * ログインAPI
@@ -20,7 +14,31 @@ export const singInApi = async (email: string, password: string) => {
       email,
       password,
     });
-    const res: ResponseType = {
+    const res: ResponseType<AuthResponseType> = {
+      code: 200,
+      data,
+    };
+    return res;
+  } catch (err) {
+    if (isAxiosError(err)) {
+      const axiosError = err as IErrorResponse;
+      const res: ResponseType = {
+        code: axiosError.response.status,
+        message: axiosError.response.data.message,
+      };
+      return res;
+    }
+  }
+};
+
+/**
+ * 認証チェックAPI
+ * @returns
+ */
+export const authenticationApi = async () => {
+  try {
+    const { data }: AxiosResponse<AuthResponseType> = await globalAxios.post('/auth/authentication/');
+    const res: ResponseType<AuthResponseType> = {
       code: 200,
       data,
     };

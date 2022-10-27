@@ -4,6 +4,7 @@
  * @package hooks
  */
 import { useState, useCallback, useEffect } from 'react';
+import { useAuthContext } from '@/contexts/AuthContext';
 import { fetchTodoListApi, createTodoApi, updateTodoApi, deleteTodoApi } from '@/apis/todoApi';
 import { TodoType } from '@/interfaces/Todo';
 
@@ -11,7 +12,8 @@ import { TodoType } from '@/interfaces/Todo';
  * useTodo
  */
 export const useTodo = () => {
-  /* todolist */
+  const { isAuth } = useAuthContext();
+  /* todo list */
   const [originTodoList, setOriginTodoList] = useState<Array<TodoType>>([]);
 
   /* actions */
@@ -85,8 +87,8 @@ export const useTodo = () => {
   );
 
   useEffect(() => {
-    fetchTodoList();
-  }, [fetchTodoList]);
+    if (isAuth) fetchTodoList();
+  }, [fetchTodoList, isAuth]);
 
   return {
     originTodoList,
