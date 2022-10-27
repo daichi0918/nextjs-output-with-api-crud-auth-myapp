@@ -45,11 +45,12 @@ export const SignInTemplate: FC = () => {
 
   return (
     <div className={styles.container}>
-      <form onSubmit={handleLogin}>
-        <div>
+      <h1 className={styles.title}>Login</h1>
+      <form className={styles.form} onSubmit={handleLogin}>
+        <div className={styles.area}>
           <InputForm type="email" value={email} placeholder="email" onChange={(e) => setEmail(e.target.value)} />
         </div>
-        <div>
+        <div className={styles.area}>
           <InputForm
             type="password"
             value={password}
@@ -57,7 +58,7 @@ export const SignInTemplate: FC = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-        <div>
+        <div className={styles.area}>
           <CommonButton type="submit" title="login" />
         </div>
       </form>
