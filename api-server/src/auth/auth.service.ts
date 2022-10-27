@@ -1,10 +1,12 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { User } from '@prisma/client';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
 import { SignInUserDto } from './dto/sign-in-user.dto';
 import { SignUpUserDto } from './dto/sign-up-user.dto';
 import { PrismaService } from '../prisma.service';
 import { JwtPayload } from '../lib/jwt/interfaces/jwt-payload.interface';
+import { ResponseUserType } from '../interfaces/User';
 
 @Injectable()
 export class AuthService {
@@ -13,6 +15,11 @@ export class AuthService {
     private readonly jwtSecret: JwtService,
   ) {}
 
+  /**
+   * ログイン
+   * @param signInUserDto
+   * @returns
+   */
   async signIn(signInUserDto: SignInUserDto) {
     const user = await this.prisma.user.findFirst({
       where: {
@@ -28,6 +35,13 @@ export class AuthService {
         'メールアドレスまたはパスワードが違います',
       );
     }
+    const resUser: ResponseUserType = {
+      id: user.id,
+      name: user.name,
+      email: user.email,
+      createdAt: user.createdAt,
+      updatedAt: user.updatedAt,
+    };
 
     const payload: JwtPayload = {
       userId: user.id,
@@ -36,10 +50,16 @@ export class AuthService {
 
     // jwtアクセストークンを作成し返却
     return {
+      user: resUser,
       accessToken: this.jwtSecret.sign(payload),
     };
   }
 
+  /**
+   * 会員登録
+   * @param signUpUserDto
+   * @returns
+   */
   async signUp(signUpUserDto: SignUpUserDto) {
     const user = await this.prisma.user.findFirst({
       where: {
@@ -61,6 +81,14 @@ export class AuthService {
       },
     });
 
+    const resUser: ResponseUserType = {
+      id: createdUser.id,
+      name: createdUser.name,
+      email: createdUser.email,
+      createdAt: createdUser.createdAt,
+      updatedAt: createdUser.updatedAt,
+    };
+
     const payload: JwtPayload = {
       userId: createdUser.id,
       email: createdUser.email,
@@ -68,6 +96,36 @@ export class AuthService {
 
     // jwtアクセストークンを作成し返却
     return {
+      user: resUser,
+      accessToken: this.jwtSecret.sign(payload),
+    };
+  }
+
+  async authCheck(userId: number) {
+    const user = await this.prisma.user.findFirst({
+      where: {
+        id: userId,
+      },
+    });
+
+    if (!user) throw new UnauthorizedException(`認証データが存在しません`);
+
+    const resUser: ResponseUserType = {
+      id: user.id,
+      name: user.name,
+      email: user.email,
+      createdAt: user.createdAt,
+      updatedAt: user.updatedAt,
+    };
+
+    const payload: JwtPayload = {
+      userId: user.id,
+      email: user.email,
+    };
+
+    // jwtアクセストークンを作成し返却
+    return {
+      user: resUser,
       accessToken: this.jwtSecret.sign(payload),
     };
   }
