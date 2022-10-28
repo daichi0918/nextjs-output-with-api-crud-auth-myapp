@@ -1,12 +1,12 @@
 /**
- * SignInTemplate
+ * SignUpTemplate
  *
  * @package components
  */
 import { FC, useState, useCallback } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { singInApi } from '@/apis/authApi';
+import { signUpApi } from '@/apis/authApi';
 import { NAVIGATION_PATH, NAVIGATION_LIST } from '@/constants/navigation';
 import { useAuthContext } from '@/contexts/AuthContext';
 import { InputForm } from '@/components/atoms/InputForm';
@@ -15,22 +15,27 @@ import { EventType } from '@/interfaces/Event';
 import styles from './styles.module.css';
 
 /**
- * SignInTemplate
+ * SignUpTemplate
  * @returns
  */
-export const SignInTemplate: FC = () => {
+export const SignUpTemplate: FC = () => {
   const router = useRouter();
   const { singIn } = useAuthContext();
+  const [name, setName] = useState<string>('');
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
+  const [passwordConfirm, setPasswordConfirm] = useState<string>('');
 
   /**
-   * ログイン処理
+   * 会員登録処理
    */
-  const handleLogin: EventType['onSubmit'] = useCallback(
+  const handleSignUp: EventType['onSubmit'] = useCallback(
     async (event) => {
       event.preventDefault();
-      const res = await singInApi(email, password);
+      if (password !== passwordConfirm) return;
+      if (name === '' || email === '' || password === '') return;
+
+      const res = await signUpApi(name, email, password);
       if (res?.code === 401) {
         console.log(res.message);
         return;
@@ -41,13 +46,16 @@ export const SignInTemplate: FC = () => {
         router.push(NAVIGATION_PATH.TOP);
       }
     },
-    [email, password, singIn, router]
+    [name, email, password, passwordConfirm, router, singIn]
   );
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.title}>Login</h1>
-      <form className={styles.form} onSubmit={handleLogin}>
+      <h1 className={styles.title}>SignUp</h1>
+      <form className={styles.form} onSubmit={handleSignUp}>
+        <div className={styles.area}>
+          <InputForm type="text" value={name} placeholder="name" onChange={(e) => setName(e.target.value)} />
+        </div>
         <div className={styles.area}>
           <InputForm type="email" value={email} placeholder="email" onChange={(e) => setEmail(e.target.value)} />
         </div>
@@ -60,10 +68,18 @@ export const SignInTemplate: FC = () => {
           />
         </div>
         <div className={styles.area}>
-          <CommonButton type="submit" title="login" />
+          <InputForm
+            type="password"
+            value={passwordConfirm}
+            placeholder="password confirm"
+            onChange={(e) => setPasswordConfirm(e.target.value)}
+          />
+        </div>
+        <div className={styles.area}>
+          <CommonButton type="submit" title="signup" />
         </div>
         <div className={styles.link}>
-          <Link href={NAVIGATION_LIST.SIGNUP}>&lt;&lt; to signup page</Link>
+          <Link href={NAVIGATION_LIST.SIGNIN}>&lt;&lt; to signin page</Link>
         </div>
       </form>
     </div>

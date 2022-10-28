@@ -10,7 +10,7 @@
  */
 export const NAVIGATION_LIST = {
   SIGNIN: '/',
-  SIGNUP: '/singup',
+  SIGNUP: '/signup',
   TOP: `/todo`,
   DETAIL: `/todo/detail/:id`,
   CREATE: `/todo/create`,
@@ -23,7 +23,7 @@ export const NAVIGATION_LIST = {
  */
 export const NAVIGATION_PATH = {
   SIGNIN: '/',
-  SIGNUP: '/singup',
+  SIGNUP: '/signup',
   TOP: `/todo`,
   DETAIL: `/todo/detail/`,
   CREATE: `/todo/create`,
