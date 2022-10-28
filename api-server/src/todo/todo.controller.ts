@@ -54,7 +54,7 @@ export class TodoController {
 
   @UseGuards(AuthGuard('jwt'))
   @Delete(':id')
-  @HttpCode(204)
+  @HttpCode(201)
   remove(@Param('id') id: string) {
     return this.todoService.remove(+id);
   }

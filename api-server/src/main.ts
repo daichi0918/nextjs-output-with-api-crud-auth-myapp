@@ -6,7 +6,9 @@ async function bootstrap() {
   // APIのURLを全て「/api」から始まるようにする
   app.setGlobalPrefix('api');
   // CORS対応
-  app.enableCors();
+  app.enableCors({
+    origin: ['http://localhost:3000', 'http://localhost'],
+  });
   await app.listen(3000);
 }
 bootstrap();

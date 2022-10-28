@@ -16,5 +16,6 @@ export interface EventType {
   onBlur: (event: FocusEvent<HTMLInputElement>) => void;
   onFocus: (event: FocusEvent<HTMLInputElement>) => void;
   onSubmit: (event: FormEvent<HTMLFormElement>) => void;
+  onSubmitButton: (event: FormEvent<HTMLButtonElement>) => void;
   onClickDiv: (event: MouseEvent<HTMLDivElement, MouseEvent>) => void;
 }
