@@ -3,12 +3,11 @@
  *
  * @package components
  */
-import { FC, useCallback } from 'react';
-import { useRouter } from 'next/router';
+import { FC } from 'react';
 import { useAuthContext } from '@/contexts/AuthContext';
 import { NavigationLink } from '@/components/atoms/NavigationLink';
-import { NAVIGATION_PATH, NAVIGATION_LIST } from '@/constants/navigation';
-import { EventType } from '@/interfaces/Event';
+import { NAVIGATION_PATH } from '@/constants/navigation';
+import { useNavigation } from './useNavigation';
 import styles from './styles.module.css';
 
 /**
@@ -16,18 +15,8 @@ import styles from './styles.module.css';
  * @constructor
  */
 export const Navigation: FC = () => {
-  const router = useRouter();
   const { signOut } = useAuthContext();
-
-  const logOut: EventType['onSubmitButton'] = useCallback(
-    (e) => {
-      e.preventDefault();
-      localStorage.removeItem('access_token');
-      signOut();
-      router.push(NAVIGATION_LIST.SIGNIN);
-    },
-    [signOut, router]
-  );
+  const { handleLogout } = useNavigation({ signOut });
 
   return (
     <div className={styles.header}>
@@ -37,7 +26,7 @@ export const Navigation: FC = () => {
           <NavigationLink title={'Top'} linkPath={NAVIGATION_PATH.TOP} />
           <NavigationLink title={'Create'} linkPath={NAVIGATION_PATH.CREATE} />
           <li className={styles.li}>
-            <button className={styles.button} onClick={logOut}>
+            <button className={styles.button} onClick={handleLogout}>
               SignOut
             </button>
           </li>
