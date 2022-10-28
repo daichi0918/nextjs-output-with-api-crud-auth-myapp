@@ -25,8 +25,8 @@ export const useTodoDetailTemplate = () => {
   const fetchTodoDetail = useCallback(async () => {
     const targetId = router?.query?.id;
     if (!!targetId && typeof targetId === 'string' && !Number.isNaN(Number(targetId))) {
-      const data = await fetchTodoDetailApi(Number(targetId));
-      setTodo(typeof data === 'object' ? data : undefined);
+      const res = await fetchTodoDetailApi(Number(targetId));
+      setTodo(res?.data && typeof res.data === 'object' ? res.data : undefined);
     }
   }, [router?.query?.id]);
 

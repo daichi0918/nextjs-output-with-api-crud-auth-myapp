@@ -1,5 +1,5 @@
 import { AxiosResponse } from 'axios';
-import globalAxios, { isAxiosError } from '@/apis/config';
+import globalAxios, { isAxiosError, ResponseType, IErrorResponse } from '@/apis/config';
 import { TodoType } from '@/interfaces/Todo';
 
 /**
@@ -9,11 +9,22 @@ import { TodoType } from '@/interfaces/Todo';
 export const fetchTodoListApi = async () => {
   try {
     const { data }: AxiosResponse<Array<TodoType>> = await globalAxios.get('/todo');
-    return data;
+    const res: ResponseType<Array<TodoType>> = {
+      code: 200,
+      data,
+    };
+    return res;
   } catch (err) {
+    const res: ResponseType = {
+      code: 500,
+      message: '',
+    };
     if (isAxiosError(err)) {
-      return err.code;
+      const axiosError = err as IErrorResponse;
+      res.code = axiosError.response.status;
+      res.message = axiosError.response.data.message;
     }
+    return res;
   }
 };
 
@@ -25,11 +36,22 @@ export const fetchTodoListApi = async () => {
 export const fetchTodoDetailApi = async (id: number) => {
   try {
     const { data }: AxiosResponse<TodoType> = await globalAxios.get(`/todo/${id}`);
-    return data;
+    const res: ResponseType<TodoType> = {
+      code: 200,
+      data,
+    };
+    return res;
   } catch (err) {
+    const res: ResponseType = {
+      code: 500,
+      message: '',
+    };
     if (isAxiosError(err)) {
-      return err.code;
+      const axiosError = err as IErrorResponse;
+      res.code = axiosError.response.status;
+      res.message = axiosError.response.data.message;
     }
+    return res;
   }
 };
 
@@ -45,11 +67,22 @@ export const createTodoApi = async (title: string, content: string) => {
       title,
       content,
     });
-    return data;
+    const res: ResponseType<TodoType> = {
+      code: 200,
+      data,
+    };
+    return res;
   } catch (err) {
+    const res: ResponseType = {
+      code: 500,
+      message: '',
+    };
     if (isAxiosError(err)) {
-      return err.code;
+      const axiosError = err as IErrorResponse;
+      res.code = axiosError.response.status;
+      res.message = axiosError.response.data.message;
     }
+    return res;
   }
 };
 
@@ -66,11 +99,22 @@ export const updateTodoApi = async (id: number, title: string, content: string) 
       title,
       content,
     });
-    return data;
+    const res: ResponseType<TodoType> = {
+      code: 200,
+      data,
+    };
+    return res;
   } catch (err) {
+    const res: ResponseType = {
+      code: 500,
+      message: '',
+    };
     if (isAxiosError(err)) {
-      return err.code;
+      const axiosError = err as IErrorResponse;
+      res.code = axiosError.response.status;
+      res.message = axiosError.response.data.message;
     }
+    return res;
   }
 };
 
@@ -82,10 +126,21 @@ export const updateTodoApi = async (id: number, title: string, content: string) 
 export const deleteTodoApi = async (id: number) => {
   try {
     const { data }: AxiosResponse<TodoType> = await globalAxios.delete(`/todo/${id}`);
-    return data;
+    const res: ResponseType<TodoType> = {
+      code: 200,
+      data,
+    };
+    return res;
   } catch (err) {
+    const res: ResponseType = {
+      code: 500,
+      message: '',
+    };
     if (isAxiosError(err)) {
-      return err.code;
+      const axiosError = err as IErrorResponse;
+      res.code = axiosError.response.status;
+      res.message = axiosError.response.data.message;
     }
+    return res;
   }
 };
