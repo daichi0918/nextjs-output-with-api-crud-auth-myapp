@@ -1,21 +1,22 @@
-version: "3.9"
+version: '3.9'
 services:
-  frontend:
-    container_name: nestjs_output_with_crud_auth_frontend
-    build: ./web-front
-    tty: true
-    ports:
-      - 80:3000
-    volumes:
-      - ./web-front:/frontend
-      - /etc/localtime:/etc/localtime:ro # タイムゾーンを日本時刻に設定
-    environment:
-      TZ: Asia/Tokyo # タイムゾーンを日本時刻に設定
-    security_opt:
-      - seccomp:unconfined
-    command: sh -c 'npm install && npm run dev'
+  # frontend:
+  #   container_name: nestjs_output_with_crud_auth_frontend
+  #   build: ./web-front
+  #   tty: true
+  #   ports:
+  #     - 80:3000
+  #   volumes:
+  #     - ./web-front:/frontend
+  #     - /etc/localtime:/etc/localtime:ro # タイムゾーンを日本時刻に設定
+  #   environment:
+  #     TZ: Asia/Tokyo # タイムゾーンを日本時刻に設定
+  #   security_opt:
+  #     - seccomp:unconfined
+  #   command: sh -c 'npm install && npm run dev'
   backend:
     container_name: nestjs_output_with_crud_auth_backend
+    platform: linux/amd64
     build: ./api-server
     tty: true
     depends_on:
@@ -38,7 +39,7 @@ services:
       - MYSQL_USER=user
       - MYSQL_PASSWORD=pass
       - MYSQL_ROOT_PASSWORD=pass
-      - "TZ=Asia/Tokyo" # タイムゾーンを日本時刻に設定
+      - 'TZ=Asia/Tokyo' # タイムゾーンを日本時刻に設定
     image: mysql:8.0
     command: mysqld --character-set-server=utf8 --collation-server=utf8_unicode_ci
     volumes:
