@@ -4,3 +4,7 @@ h1.title {
   color: #fff;
   font-size: 48px;
 }
+
+section.area {
+  margin-bottom: 40px;
+}
