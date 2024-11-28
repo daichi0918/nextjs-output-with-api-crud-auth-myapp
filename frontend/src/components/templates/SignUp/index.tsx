@@ -1,6 +1,6 @@
 'use client';
 /**
- * LoginTemplate
+ * SignUpTemplate
  *
  * @package templates
  */
@@ -16,15 +16,24 @@ import NavigationLink from '@/components/atoms/NavigationLink';
 import InputFieldWrapper from '@/components/organisms/InputFieldWrapper';
 
 /**
- * LoginTemplate
+ * SignUpTemplate
  * @returns {JSX.Element}
  */
-const LoginTemplate = () => {
+const SignUpTemplate = () => {
   /* state定義 */
+  const [inputNameValue, setInputNameValue] = useState<string>('');
   const [inputEmailValue, setInputEmailValue] = useState<string>('');
   const [inputPasswordValue, setInputPasswordValue] = useState<string>('');
+  const [inputPasswordConfirmValue, setInputPasswordConfirmValue] =
+    useState<string>('');
 
   /* action定義 */
+  /**
+   * nameの値更新処理
+   * @param { React.ChangeEvent<HTMLInputElement>} e
+   */
+  const handleInputNameChange: EventType['onChangeInput'] = (e) =>
+    setInputNameValue(e.target.value);
   /**
    * emailの値更新処理
    * @param { React.ChangeEvent<HTMLInputElement>} e
@@ -39,8 +48,22 @@ const LoginTemplate = () => {
   const handleInputPasswordChange: EventType['onChangeInput'] = (e) =>
     setInputPasswordValue(e.target.value);
 
+  /**
+   * passwordの値更新処理
+   * @param { React.ChangeEvent<HTMLInputElement>} e
+   */
+  const handleInputPasswordConfirmChange: EventType['onChangeInput'] = (e) =>
+    setInputPasswordConfirmValue(e.target.value);
+
   return (
-    <BaseLayout title={'Login'}>
+    <BaseLayout title={'SignUp'}>
+      <InputFieldWrapper>
+        <InputForm
+          placeholder={'name'}
+          value={inputNameValue}
+          onChange={handleInputNameChange}
+        />
+      </InputFieldWrapper>
       <InputFieldWrapper>
         <InputForm
           placeholder={'email'}
@@ -55,13 +78,20 @@ const LoginTemplate = () => {
           onChange={handleInputPasswordChange}
         />
       </InputFieldWrapper>
-      <Button buttonName={'login'} onClick={() => console.log('button')} />
+      <InputFieldWrapper>
+        <InputForm
+          placeholder={'password confirm'}
+          value={inputPasswordConfirmValue}
+          onChange={handleInputPasswordConfirmChange}
+        />
+      </InputFieldWrapper>
+      <Button buttonName={'signup'} onClick={() => console.log('button')} />
       <NavigationLink
-        href={NAVIGATION_LIST.SIGNUP}
-        linkName={'to signup page'}
+        href={NAVIGATION_LIST.LOGIN}
+        linkName={'to signin page'}
       />
     </BaseLayout>
   );
 };
 
-export default LoginTemplate;
+export default SignUpTemplate;

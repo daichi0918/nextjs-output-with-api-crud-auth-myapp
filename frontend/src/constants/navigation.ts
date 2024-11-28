@@ -17,7 +17,7 @@ export const BASE_PATH = '';
  */
 export const NAVIGATION_LIST = {
   LOGIN: `${BASE_PATH}/`,
-  SIGNUP: `${BASE_PATH}/signUP`,
+  SIGNUP: `${BASE_PATH}/signup`,
   DETAIL: `${BASE_PATH}/detail/:id`,
   CREATE: `${BASE_PATH}/create`,
   EDIT: `${BASE_PATH}/edit/:id`,
