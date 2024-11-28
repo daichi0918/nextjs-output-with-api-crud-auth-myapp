@@ -4,7 +4,7 @@
  * @package organisms
  */
 
-import { FC } from 'react';
+import { FC, memo } from 'react';
 import styles from './styles.module.css';
 
 interface BaseLayoutProps {
@@ -15,11 +15,11 @@ interface BaseLayoutProps {
 /**
  * @returns {JSX.Element}
  */
-export const BaseLayout: FC<BaseLayoutProps> = ({ children, title }) => {
+export const BaseLayout: FC<BaseLayoutProps> = memo(({ children, title }) => {
   return (
     <>
       <h1 className={styles.title}>{title}</h1>
       {children}
     </>
   );
-};
+});
