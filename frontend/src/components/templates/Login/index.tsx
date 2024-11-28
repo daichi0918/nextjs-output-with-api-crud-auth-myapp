@@ -14,30 +14,19 @@ import Link from 'next/link';
 import { NAVIGATION_LIST, NAVIGATION_PATH } from '@/constants/navigation';
 import NavigationLink from '@/components/atoms/NavigationLink';
 import InputFieldWrapper from '@/components/organisms/InputFieldWrapper';
+import { useLoginTemplate } from './useLoginTemplate';
 
 /**
  * LoginTemplate
  * @returns {JSX.Element}
  */
 const LoginTemplate = () => {
-  /* state定義 */
-  const [inputEmailValue, setInputEmailValue] = useState<string>('');
-  const [inputPasswordValue, setInputPasswordValue] = useState<string>('');
-
-  /* action定義 */
-  /**
-   * emailの値更新処理
-   * @param { React.ChangeEvent<HTMLInputElement>} e
-   */
-  const handleInputEmailChange: EventType['onChangeInput'] = (e) =>
-    setInputEmailValue(e.target.value);
-
-  /**
-   * passwordの値更新処理
-   * @param { React.ChangeEvent<HTMLInputElement>} e
-   */
-  const handleInputPasswordChange: EventType['onChangeInput'] = (e) =>
-    setInputPasswordValue(e.target.value);
+  const {
+    inputEmailValue,
+    inputPasswordValue,
+    handleInputEmailChange,
+    handleInputPasswordChange,
+  } = useLoginTemplate();
 
   return (
     <BaseLayout title={'Login'}>
