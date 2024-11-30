@@ -17,7 +17,7 @@ interface ContextInterface {
   user: UserType | undefined;
   isAuth: boolean;
   // why: なぜ引数を入れてる？
-  singIn: (user: UserType) => Promise<void>;
+  signIn: (user: UserType) => Promise<void>;
   signOut: () => Promise<void>;
 }
 
@@ -30,13 +30,13 @@ const AuthContext = createContext({} as ContextInterface);
  */
 
 export const AuthProvider: FC<Props> = ({ children }) => {
-  const { user, isAuth, singIn, signOut } = useAuth();
+  const { user, isAuth, signIn, signOut } = useAuth();
   return (
     <AuthContext.Provider
       value={{
         user,
         isAuth,
-        singIn,
+        signIn,
         signOut,
       }}
     >

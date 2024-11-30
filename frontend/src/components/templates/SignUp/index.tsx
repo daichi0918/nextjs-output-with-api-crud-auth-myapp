@@ -30,43 +30,46 @@ const SignUpTemplate = () => {
     handleInputEmailChange,
     handleInputPasswordChange,
     handleInputPasswordConfirmChange,
+    handleSignUp,
   } = useSignUpTemplate();
 
   return (
     <BaseLayout title={'SignUp'}>
-      <InputFieldWrapper>
-        <InputForm
-          placeholder={'name'}
-          value={inputNameValue}
-          onChange={handleInputNameChange}
+      <form onSubmit={handleSignUp}>
+        <InputFieldWrapper>
+          <InputForm
+            placeholder={'name'}
+            value={inputNameValue}
+            onChange={handleInputNameChange}
+          />
+        </InputFieldWrapper>
+        <InputFieldWrapper>
+          <InputForm
+            placeholder={'email'}
+            value={inputEmailValue}
+            onChange={handleInputEmailChange}
+          />
+        </InputFieldWrapper>
+        <InputFieldWrapper>
+          <InputForm
+            placeholder={'password'}
+            value={inputPasswordValue}
+            onChange={handleInputPasswordChange}
+          />
+        </InputFieldWrapper>
+        <InputFieldWrapper>
+          <InputForm
+            placeholder={'password confirm'}
+            value={inputPasswordConfirmValue}
+            onChange={handleInputPasswordConfirmChange}
+          />
+        </InputFieldWrapper>
+        <Button buttonName={'signup'} onClick={() => console.log('button')} />
+        <NavigationLink
+          href={NAVIGATION_LIST.LOGIN}
+          linkName={'to signin page'}
         />
-      </InputFieldWrapper>
-      <InputFieldWrapper>
-        <InputForm
-          placeholder={'email'}
-          value={inputEmailValue}
-          onChange={handleInputEmailChange}
-        />
-      </InputFieldWrapper>
-      <InputFieldWrapper>
-        <InputForm
-          placeholder={'password'}
-          value={inputPasswordValue}
-          onChange={handleInputPasswordChange}
-        />
-      </InputFieldWrapper>
-      <InputFieldWrapper>
-        <InputForm
-          placeholder={'password confirm'}
-          value={inputPasswordConfirmValue}
-          onChange={handleInputPasswordConfirmChange}
-        />
-      </InputFieldWrapper>
-      <Button buttonName={'signup'} onClick={() => console.log('button')} />
-      <NavigationLink
-        href={NAVIGATION_LIST.LOGIN}
-        linkName={'to signin page'}
-      />
+      </form>
     </BaseLayout>
   );
 };

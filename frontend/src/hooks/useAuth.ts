@@ -23,7 +23,7 @@ export const useAuth = () => {
   /**
    * グローバルの認証状態をログイン済にする (ログイン)
    */
-  const singIn = useCallback(async (user: UserType) => {
+  const signIn = useCallback(async (user: UserType) => {
     setUser(user);
     setIsAuth(true);
   }, []);
@@ -59,8 +59,8 @@ export const useAuth = () => {
 
     // 未ログインでログイン後のページにいる場合、ログイン画面にリダイレクト
     if (!auth && !isExitBeforeAuthPage()) router.push(NAVIGATION_LIST.LOGIN);
-    // ログイン済で未ログインのページにいる場合、Todo一覧ページにリダイレクト
-    if (auth && isExitBeforeAuthPage()) router.push(NAVIGATION_LIST.LOGIN);
+    // // ログイン済で未ログインのページにいる場合、Todo一覧ページにリダイレクト
+    // if (auth && isExitBeforeAuthPage()) router.push(NAVIGATION_LIST.LOGIN);
   }, [isExitBeforeAuthPage, router]);
 
   useEffect(() => {
@@ -70,7 +70,7 @@ export const useAuth = () => {
   return {
     user,
     isAuth,
-    singIn,
+    signIn,
     signOut,
   };
 };

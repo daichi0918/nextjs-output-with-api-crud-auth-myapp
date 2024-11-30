@@ -16,7 +16,7 @@ export const useLoginTemplate = () => {
   /* state定義 */
   const [inputEmailValue, setInputEmailValue] = useState<string>('');
   const [inputPasswordValue, setInputPasswordValue] = useState<string>('');
-  const { singIn } = useAuth();
+  const { signIn } = useAuth();
 
   /* action定義 */
   /**
@@ -32,7 +32,9 @@ export const useLoginTemplate = () => {
    */
   const handleInputPasswordChange: EventType['onChangeInput'] = (e) =>
     setInputPasswordValue(e.target.value);
-
+  /**
+   * ログイン処理
+   */
   const handleLogin: EventType['onSubmit'] = useCallback(
     async (event) => {
       event.preventDefault();
@@ -42,7 +44,7 @@ export const useLoginTemplate = () => {
         return;
       }
       if (res?.data?.user) {
-        singIn(res.data.user);
+        signIn(res.data.user);
         localStorage.setItem('access_token', res.data.accessToken);
         router.push(NAVIGATION_PATH.TOP);
       }
