@@ -17,7 +17,7 @@ interface ButtonProps {
 export const Button = memo((props: ButtonProps) => {
   const { buttonName, onClick } = props;
   return (
-    <button className={styles.button} onClick={onClick}>
+    <button className={styles.button} onClick={onClick} type={'submit'}>
       {buttonName}
     </button>
   );

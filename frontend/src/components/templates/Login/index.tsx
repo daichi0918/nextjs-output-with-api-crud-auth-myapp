@@ -30,21 +30,23 @@ const LoginTemplate = () => {
 
   return (
     <BaseLayout title={'Login'}>
-      <InputFieldWrapper>
-        <InputForm
-          placeholder={'email'}
-          value={inputEmailValue}
-          onChange={handleInputEmailChange}
-        />
-      </InputFieldWrapper>
-      <InputFieldWrapper>
-        <InputForm
-          placeholder={'password'}
-          value={inputPasswordValue}
-          onChange={handleInputPasswordChange}
-        />
-      </InputFieldWrapper>
-      <Button buttonName={'login'} onClick={() => console.log('button')} />
+      <form onSubmit={() => console.log('aaa')}>
+        <InputFieldWrapper>
+          <InputForm
+            placeholder={'email'}
+            value={inputEmailValue}
+            onChange={handleInputEmailChange}
+          />
+        </InputFieldWrapper>
+        <InputFieldWrapper>
+          <InputForm
+            placeholder={'password'}
+            value={inputPasswordValue}
+            onChange={handleInputPasswordChange}
+          />
+        </InputFieldWrapper>
+        <Button buttonName={'login'} onClick={() => console.log('button')} />
+      </form>
       <NavigationLink
         href={NAVIGATION_LIST.SIGNUP}
         linkName={'to signup page'}
