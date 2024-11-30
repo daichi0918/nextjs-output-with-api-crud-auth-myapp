@@ -37,8 +37,8 @@ export const useLoginTemplate = () => {
     async (event) => {
       event.preventDefault();
       const res = await signInApi(inputEmailValue, inputPasswordValue);
-      if (res?.code === 401) {
-        console.log(res.message);
+      if (res?.code === 400 || res?.code === 401) {
+        alert(res.message);
         return;
       }
       if (res?.data?.user) {
@@ -54,5 +54,6 @@ export const useLoginTemplate = () => {
     inputPasswordValue,
     handleInputEmailChange,
     handleInputPasswordChange,
+    handleLogin,
   };
 };

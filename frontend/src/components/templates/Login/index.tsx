@@ -26,11 +26,12 @@ const LoginTemplate = () => {
     inputPasswordValue,
     handleInputEmailChange,
     handleInputPasswordChange,
+    handleLogin,
   } = useLoginTemplate();
 
   return (
     <BaseLayout title={'Login'}>
-      <form onSubmit={() => console.log('aaa')}>
+      <form onSubmit={handleLogin}>
         <InputFieldWrapper>
           <InputForm
             placeholder={'email'}
