@@ -21,7 +21,7 @@ interface ContextInterface {
   signOut: () => Promise<void>;
 }
 
-const AuthContext = createContext({} as ContextInterface);
+export const AuthContext = createContext({} as ContextInterface);
 
 /**
  * AuthProvider
