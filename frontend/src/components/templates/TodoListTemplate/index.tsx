@@ -7,7 +7,7 @@
 
 import InputForm from '@/components/atoms/InputForm';
 import { BaseLayout } from '@/components/organisms/BaseLayout';
-import InputFieldWrapper from '@/components/organisms/InputFieldWrapper';
+import FieldWrapper from '@/components/organisms/FieldWrapper';
 import { TodoContext } from '@/contexts/TodoContext';
 import { useContext } from 'react';
 import { useTodoTemplate } from './useTodoListTemplate';
@@ -31,21 +31,21 @@ export const TodoListTemplate = () => {
   return (
     <BaseLayout title={'Todo List'}>
       <form onSubmit={() => console.log('aaa')}>
-        <InputFieldWrapper>
+        <FieldWrapper>
           <InputForm
             placeholder={'Search Keyword'}
             value={searchKeyword}
             onChange={handleChangeSearchKeyword}
           />
-        </InputFieldWrapper>
-        <InputFieldWrapper>
+        </FieldWrapper>
+        <FieldWrapper>
           {showTodoList?.length > 0 && (
             <TodoList
               todoList={showTodoList}
               handleDeleteTodo={handleDeleteTodo}
             />
           )}
-        </InputFieldWrapper>
+        </FieldWrapper>
       </form>
     </BaseLayout>
   );

@@ -13,7 +13,7 @@ import { Button } from '@/components/atoms/Button';
 import Link from 'next/link';
 import { NAVIGATION_LIST, NAVIGATION_PATH } from '@/constants/navigation';
 import NavigationLink from '@/components/atoms/NavigationLink';
-import InputFieldWrapper from '@/components/organisms/InputFieldWrapper';
+import FieldWrapper from '@/components/organisms/FieldWrapper';
 import { useSignUpTemplate } from './useSignUpTemplate';
 
 /**
@@ -36,34 +36,34 @@ const SignUpTemplate = () => {
   return (
     <BaseLayout title={'SignUp'}>
       <form onSubmit={handleSignUp}>
-        <InputFieldWrapper>
+        <FieldWrapper>
           <InputForm
             placeholder={'name'}
             value={inputNameValue}
             onChange={handleInputNameChange}
           />
-        </InputFieldWrapper>
-        <InputFieldWrapper>
+        </FieldWrapper>
+        <FieldWrapper>
           <InputForm
             placeholder={'email'}
             value={inputEmailValue}
             onChange={handleInputEmailChange}
           />
-        </InputFieldWrapper>
-        <InputFieldWrapper>
+        </FieldWrapper>
+        <FieldWrapper>
           <InputForm
             placeholder={'password'}
             value={inputPasswordValue}
             onChange={handleInputPasswordChange}
           />
-        </InputFieldWrapper>
-        <InputFieldWrapper>
+        </FieldWrapper>
+        <FieldWrapper>
           <InputForm
             placeholder={'password confirm'}
             value={inputPasswordConfirmValue}
             onChange={handleInputPasswordConfirmChange}
           />
-        </InputFieldWrapper>
+        </FieldWrapper>
         <Button buttonName={'signup'} onClick={() => console.log('button')} />
         <NavigationLink
           href={NAVIGATION_LIST.LOGIN}

@@ -13,7 +13,7 @@ import { Button } from '@/components/atoms/Button';
 import Link from 'next/link';
 import { NAVIGATION_LIST, NAVIGATION_PATH } from '@/constants/navigation';
 import NavigationLink from '@/components/atoms/NavigationLink';
-import InputFieldWrapper from '@/components/organisms/InputFieldWrapper';
+import FieldWrapper from '@/components/organisms/FieldWrapper';
 import { useLoginTemplate } from './useLoginTemplate';
 
 /**
@@ -32,20 +32,20 @@ const LoginTemplate = () => {
   return (
     <BaseLayout title={'Login'}>
       <form onSubmit={handleLogin}>
-        <InputFieldWrapper>
+        <FieldWrapper>
           <InputForm
             placeholder={'email'}
             value={inputEmailValue}
             onChange={handleInputEmailChange}
           />
-        </InputFieldWrapper>
-        <InputFieldWrapper>
+        </FieldWrapper>
+        <FieldWrapper>
           <InputForm
             placeholder={'password'}
             value={inputPasswordValue}
             onChange={handleInputPasswordChange}
           />
-        </InputFieldWrapper>
+        </FieldWrapper>
         <Button buttonName={'login'} onClick={() => console.log('button')} />
       </form>
       <NavigationLink

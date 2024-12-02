@@ -1,12 +1,12 @@
 /**
- * InputFieldWrapperProps
+ * FieldWrapperProps
  *
  * @package organisms
  */
 import React, { memo } from 'react';
 import styles from './styles.module.css';
 
-interface InputFieldWrapperProps {
+interface FieldWrapperProps {
   children: React.ReactNode;
 }
 
@@ -14,8 +14,8 @@ interface InputFieldWrapperProps {
  * @param {LinkPInputWrapperPropsrops} props
  * @returns {JSX.Element}
  */
-const InputFieldWrapper = memo(({ children }: InputFieldWrapperProps) => {
+const FieldWrapper = memo(({ children }: FieldWrapperProps) => {
   return <section className={styles.area}>{children}</section>;
 });
 
-export default InputFieldWrapper;
+export default FieldWrapper;
