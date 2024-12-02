@@ -1,5 +1,5 @@
 /**
- * useTodoTemplate
+ * useTodoListTemplate
  *
  * @package hooks
  */
