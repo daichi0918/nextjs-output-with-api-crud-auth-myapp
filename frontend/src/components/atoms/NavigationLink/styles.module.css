@@ -4,6 +4,7 @@
   text-decoration: none;
   margin-top: 15px;
   display: block;
+  width: 180px;
 }
 
 .link:hover {
