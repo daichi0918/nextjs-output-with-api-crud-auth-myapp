@@ -31,6 +31,9 @@ export const useTodoCreateTemplate = () => {
   const handleInputContentChange: EventType['onChangeTextArea'] = (e) =>
     setInputContentValue(e.target.value);
 
+  /**
+   * todo追加処理
+   */
   const handleCreateTodo: EventType['onSubmit'] = useCallback(
     async (e) => {
       e.preventDefault();
