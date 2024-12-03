@@ -64,7 +64,7 @@ const SignUpTemplate = () => {
             onChange={handleInputPasswordConfirmChange}
           />
         </FieldWrapper>
-        <Button buttonName={'signup'} onClick={() => console.log('button')} />
+        <Button buttonName={'signup'} />
         <NavigationLink
           href={NAVIGATION_LIST.LOGIN}
           linkName={'to signin page'}
