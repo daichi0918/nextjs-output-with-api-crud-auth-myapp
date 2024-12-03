@@ -1,7 +1,7 @@
 import { NAVIGATION_PATH } from '@/constants/navigation';
 import { TodoContext } from '@/contexts/TodoContext';
 import { EventType } from '@/interfaces/Event';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import { useCallback, useContext, useState } from 'react';
 
 /**
