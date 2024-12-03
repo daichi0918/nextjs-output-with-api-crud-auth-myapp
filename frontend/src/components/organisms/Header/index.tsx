@@ -7,8 +7,13 @@
 import styles from './styles.module.css';
 import Link from 'next/link';
 import { NAVIGATION_LIST } from '@/constants/navigation';
+import { memo } from 'react';
 
-export const Header = () => {
+/**
+ * Header
+ * @returns {JSX.Element}
+ */
+export const Header = memo(() => {
   return (
     <header className={styles.navbar}>
       <div className={styles.headerTitle}>
@@ -29,4 +34,4 @@ export const Header = () => {
       </nav>
     </header>
   );
-};
+});

@@ -13,6 +13,7 @@ interface BaseLayoutProps {
 }
 
 /**
+ * BaseLayout
  * @returns {JSX.Element}
  */
 export const BaseLayout: FC<BaseLayoutProps> = memo(({ children, title }) => {
