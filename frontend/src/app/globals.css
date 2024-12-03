@@ -1,9 +1,8 @@
 body {
   font-family: Times New Roman, Times, serif;
   background-color: teal;
+  margin: 0;
 }
-
-.container {
-  width: 50%;
-  margin: 80px auto;
-}
+/* * {
+  box-sizing: border-box;
+} */

@@ -1,0 +1,50 @@
+.navbar {
+  background: rgba(0, 0, 0, 0.2);
+  font-family: Times New Roman, Times, serif;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 30px;
+  height: 80px;
+}
+
+.headerTitle {
+  color: #fff;
+  font-size: 32px;
+  font-weight: 700;
+}
+
+.navLinks {
+  margin-right: 30px;
+}
+
+.list {
+  width: 100%;
+  padding-left: 0;
+  display: flex;
+  justify-content: space-around;
+}
+
+.item {
+  text-align: center;
+  list-style-type: none;
+  margin-right: 30px;
+}
+
+.item > a,
+.item > div {
+  transition: 0.3s;
+  display: block;
+  background-color: #fff;
+  text-decoration: none;
+  color: teal;
+  font-size: 24px;
+  font-weight: 700;
+  width: 120px;
+  padding: 10px;
+  border-radius: 10px;
+  font-family: Times New Roman, Times, serif;
+}

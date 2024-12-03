@@ -18,8 +18,10 @@ interface BaseLayoutProps {
 export const BaseLayout: FC<BaseLayoutProps> = memo(({ children, title }) => {
   return (
     <>
-      <h1 className={styles.title}>{title}</h1>
-      {children}
+      <div className={styles.container}>
+        <h1 className={styles.title}>{title}</h1>
+        {children}
+      </div>
     </>
   );
 });

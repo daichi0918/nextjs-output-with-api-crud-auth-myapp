@@ -1,3 +1,8 @@
+.container {
+  width: 50%;
+  margin: 120px auto;
+}
+
 h1.title {
   text-align: center;
   font-family: Times New Roman, Times, serif;
