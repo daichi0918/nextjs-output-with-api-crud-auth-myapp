@@ -7,9 +7,9 @@
 - typescript: 4.8.4
 - react: 18.2.0
 - react-dom: 18.2.0
-- next: 12.3.1
-- @fortawesome/react-fontawesom: 0.2.0
-- @fortawesome/free-solid-svg-icons: 6.2.0
+- next: 14.2.18
+- @fortawesome/react-fontawesom: 0.2.2
+- @fortawesome/free-solid-svg-icons: ^6.6.0
 
 ### バックエンド
 
