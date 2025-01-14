@@ -33,6 +33,13 @@ const SignUpTemplate = () => {
     handleSignUp,
   } = useSignUpTemplate();
 
+  console.log({
+    inputNameValue,
+    inputEmailValue,
+    inputPasswordValue,
+    inputPasswordConfirmValue,
+  });
+
   return (
     <BaseLayout title={'SignUp'}>
       <form onSubmit={handleSignUp}>

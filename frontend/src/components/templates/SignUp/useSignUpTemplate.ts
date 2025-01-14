@@ -47,7 +47,7 @@ export const useSignUpTemplate = () => {
     setInputPasswordValue(e.target.value);
 
   /**
-   * passwordの値更新処理
+   * 確認用passwordの値更新処理
    * @param { React.ChangeEvent<HTMLInputElement>} e
    */
   const handleInputPasswordConfirmChange: EventType['onChangeInput'] = (e) =>
@@ -58,11 +58,17 @@ export const useSignUpTemplate = () => {
    */
   const handleSignUp: EventType['onSubmit'] = useCallback(
     async (event) => {
+      event.preventDefault();
+      console.log('Form Submitted with values:', {
+        inputNameValue,
+        inputEmailValue,
+        inputPasswordValue,
+        inputPasswordConfirmValue,
+      });
       if (inputPasswordValue !== inputPasswordConfirmValue) {
         alert('パスワードと確認用パスワードが異なっています');
         return;
       }
-      event.preventDefault();
       const res = await signUpApi(
         inputNameValue,
         inputEmailValue,
@@ -80,7 +86,12 @@ export const useSignUpTemplate = () => {
         router.push(NAVIGATION_PATH.TOP);
       }
     },
-    [inputNameValue, inputEmailValue, inputPasswordValue]
+    [
+      inputNameValue,
+      inputEmailValue,
+      inputPasswordValue,
+      inputPasswordConfirmValue,
+    ]
   );
 
   return {
