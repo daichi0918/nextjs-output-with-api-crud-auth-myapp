@@ -1,4 +1,5 @@
 import axios, { AxiosError } from 'axios';
+import crypto from 'crypto-js';
 
 const NEXT_PUBLIC_BASE_API_URL =
   process.env.NEXT_PUBLIC_BASE_API_URL || 'http://localhost';
@@ -36,10 +37,16 @@ export const globalAxios = axios.create({
   },
 });
 
-const getToken = () =>
-  localStorage.getItem('access_token')
-    ? localStorage.getItem('access_token')
-    : null;
+const getToken = () => {
+  const ecryptedAccessToken = localStorage.getItem('access_token');
+  if (ecryptedAccessToken) {
+    const decrypted = crypto.AES.decrypt(ecryptedAccessToken, 'hogefuga');
+    const value = decrypted.toString(crypto.enc.Utf8);
+    return value;
+  } else {
+    return null;
+  }
+};
 
 const getAuthorizationHeader = () => `Bearer ${getToken()}`;
 

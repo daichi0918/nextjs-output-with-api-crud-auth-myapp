@@ -10,6 +10,7 @@ import { useAuth } from '@/hooks/useAuth';
 import { signUpApi } from '@/apis/authApi';
 import { useRouter, usePathname } from 'next/navigation';
 import { NAVIGATION_LIST, NAVIGATION_PATH } from '@/constants/navigation';
+import crypto from 'crypto-js';
 
 /**
  * useSignUpTemplate
@@ -73,7 +74,9 @@ export const useSignUpTemplate = () => {
       }
       if (res?.data?.user) {
         signIn(res.data.user);
-        localStorage.setItem('access_token', res.data.accessToken);
+        const ecrypted = crypto.AES.encrypt(res.data.accessToken, 'hogefuga');
+        localStorage.setItem('access_token', ecrypted.toString());
+        // localStorage.setItem('access_token', res.data.accessToken);
         router.push(NAVIGATION_PATH.TOP);
       }
     },
